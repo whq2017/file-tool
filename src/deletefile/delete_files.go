@@ -70,7 +70,7 @@ func isExistName(name string) bool {
         if nameMap[newName] {
             _,_ = fmt.Fprintf(color.Output,"Do you want to delete: %v ?\n", color.BlueString(name))
             if toAsk {
-                return userControlOp(1, name)
+                return userControlOp(1, name, newName)
             }
         }
     }
@@ -91,14 +91,14 @@ func dealNames(names[]string) error {
     return nil
 }
 
-func userControlOp(count int, name string) bool {
+func userControlOp(count int, fileName, mapKey string) bool {
     
     if count > 3 {
         return false
     }
     
     var userInput string
-    fmt.Printf("Enter y/yes, n/no or a/all.(default y): ")
+    fmt.Printf("Enter y/yes, n/no or a/always.(default y): ")
     _,err := fmt.Scanln(&userInput)
     
     if err != nil{
@@ -106,7 +106,7 @@ func userControlOp(count int, name string) bool {
             userInput = "y"
         }else {
             color.Red("Enter error data: ", err.Error())
-            return userControlOp(count + 1,name)
+            return userControlOp(count + 1,fileName, mapKey)
         }
     }
     
@@ -114,10 +114,11 @@ func userControlOp(count int, name string) bool {
          return true
     } else if userInput == "n" || userInput == "no" {
         return false
-    }else if userInput == "a" || userInput == "all" {
-        nameMap[name] = true
+    }else if userInput == "a" || userInput == "always" {
+        delete(nameMap, mapKey)    // 修正key
+        nameMap[fileName] = true
         return true
     }else {
-        return userControlOp(count + 1,name)
+        return userControlOp(count + 1,fileName, mapKey)
     }
 }

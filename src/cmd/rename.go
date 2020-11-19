@@ -37,7 +37,7 @@ func renameFunc(){
     fmt.Println(" Path: ", path)
     
     if strings.TrimSpace(dest) == "" {
-        fmt.Printf(" Dest: %v [deletefile string]\n", strconv.Quote(dest))
+        fmt.Printf(" Dest: %v [delete string]\n", strconv.Quote(dest))
     } else{
         fmt.Printf(" Dest: %v\n", dest)
     }
