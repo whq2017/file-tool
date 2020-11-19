@@ -53,8 +53,8 @@ func deleteInfo(){
     }
     
     magentaColor := color.New(color.FgMagenta).Add(color.Bold)
-    _,_ = magentaColor.Println("\n Running complete!")
-    _,_ = magentaColor.Println(" Deleting file count: %v", deleteCnt)
+    _,_ = magentaColor.Println("\n Run complete!")
+    _,_ = magentaColor.Println(" Delete file count: ", deleteCnt)
 }
 
 func helpDeleteInfo(){

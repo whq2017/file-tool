@@ -47,7 +47,7 @@ func deleteFiles(path string) error {
             _ = deleteFiles(newPath)
         } else if isExistName(v.Name()) {
             _ = os.Remove(newPath)
-            _,_ = fmt.Fprintf(color.Output,"Delete file: %v success!\n", color.RedString(newPath))
+            _,_ = fmt.Fprintf(color.Output,"Delete file: %v \n", color.RedString(newPath))
             deleteCount++
         }
     }
