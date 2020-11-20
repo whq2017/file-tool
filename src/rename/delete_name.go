@@ -34,11 +34,21 @@ func dealFileName(deleteStr []string, file os.FileInfo, path, destStr string){
             oldName := filepath.Join(path, file.Name())
             newName := filepath.Join(path, strings.ReplaceAll(file.Name(), v, destStr))
             
-            _,_ = fmt.Fprintf(color.Output,"oldName: %v \n --> newName: %v\n", color.BlueString(oldName), color.RedString(newName))
-            
-            _ = os.Rename(oldName,newName)
-             
-             break
+            // 如果更改新文件名是不存在的，则直接更改
+            if _, err := os.Stat(newName); err != nil{
+                if os.IsNotExist(err) {
+                    _,_ = fmt.Fprintf(color.Output,"oldName: %v \n --> newName: %v\n", color.BlueString(oldName), color.RedString(newName))
+    
+                    _ = os.Rename(oldName,newName)
+                    break
+                }else{
+                    // 发生其他错误（执行的可能性较低），比如路径拼写错误
+                    color.Red("Rename Failed: ", err.Error())
+                }
+            }else{
+                // 文件存在
+                // todo: 询问是否删除已经存在的文件
+            }
         }
     }
 }
