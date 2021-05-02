@@ -37,7 +37,7 @@ func dealFileName(deleteStr []string, file os.FileInfo, path, destStr string){
             // 如果更改新文件名是不存在的，则直接更改
             if _, err := os.Stat(newName); err != nil{
                 if os.IsNotExist(err) {
-                    _,_ = fmt.Fprintf(color.Output,"oldName: %v \n --> newName: %v\n", color.BlueString(oldName), color.RedString(newName))
+                    _,_ = fmt.Fprintf(color.Output,"%v \n --> %v\n", color.BlueString(oldName), color.RedString(newName))
     
                     _ = os.Rename(oldName,newName)
                     break

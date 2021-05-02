@@ -42,7 +42,7 @@ func renameFunc(){
         fmt.Printf(" Dest: %v\n", dest)
     }
     
-    fmt.Println(" String Array: ", src)
+    fmt.Println(" Src Array: ", src)
     color.Unset() // Don't forget to unset
     
     
